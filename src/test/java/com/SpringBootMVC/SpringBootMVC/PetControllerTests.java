@@ -43,9 +43,9 @@ public class PetControllerTests {
         Long notExistUserId = 999_999L;
         PetDto petDto = new PetDto(null, "Gav gav", notExistUserId);
 
-        doThrow(new NoSuchElementException("User not found"))
-                .when(userService)
-                .findUserById(notExistUserId);
+        doThrow(NoSuchElementException.class)
+                .when(petService)
+                .createPet(petDto);
 
         mockMvc.perform(post("/Pet")
                         .contentType(MediaType.APPLICATION_JSON)
